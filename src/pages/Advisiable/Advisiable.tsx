@@ -77,13 +77,12 @@ export default function Advisiable() {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center flex-col">
-      
       <div className="px-6 py-16 md:py-20 dark:text-white w-full">
         <div className="flex justify-end items-center mb-8">
           <select
             onChange={(e) => setSelectedCategory(+e.target.value)}
             value={selectedCategory}
-            className="p-2 border rounded"
+            className="p-2 border rounded dark:bg-black"
           >
             <option value={-1}>All Products</option>
             {allCategories?.data.map((category: TCategories) => (
