@@ -74,7 +74,7 @@ export default function NavMenu({
   });
 
   return (
-    <div className="absolute top-0 left-0 w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white overflow-auto">
+    <div className="absolute top-0 left-0 w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white overflow-auto shadow-md">
       {/* Header */}
       <div className="w-full text-2xl font-bold bg-white dark:bg-[#3d3c3c] dark:text-white">
         <div className="flex justify-between items-center px-8 py-7 border-b border-gray-300">

@@ -73,11 +73,11 @@ export default function Subscribe() {
       ></div>
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center md:px-28 lg:mx-48">
+      <div className="absolute inset-0  flex flex-col justify-center items-center md:px-28 lg:mx-48">
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 text-center">
           DISCOVER STYLE JUST A BUTTON PRESS AWAY!
         </h1>
-        <div className="mt-4 flex flex-col gap-4 w-full px-5 ">
+        {/* <div className="mt-4 flex flex-col gap-4 w-full px-5 ">
           <input
             type="email"
             placeholder="Your email address"
@@ -86,7 +86,7 @@ export default function Subscribe() {
           <button className="px-6 py-3 sm:py-4 bg-gray-800 dark:bg-[#1A1A1A] text-white dark:text-gray-100 rounded-r-md">
             Subscribe
           </button>
-        </div>
+        </div> */}
         <p className="text-gray-600 dark:text-gray-300 mt-4 text-sm sm:text-lg sm:font-semibold text-center uppercase">
           Instantly access the latest fashion trends and exclusive deals on our
           site. Discover your perfect style in a few clicks!
