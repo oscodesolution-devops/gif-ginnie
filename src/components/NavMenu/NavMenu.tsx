@@ -1,40 +1,29 @@
+import { useState } from "react";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom"; // Import navigation hook
+import { getAllCategories } from "../../api/api";
+import { useQuery } from "@tanstack/react-query";
 
-import { useNavigate } from "react-router-dom"; // Import Link from React Router DOM
+type TnavItems = {
+  name: string;
+  link: string;
+  list?: { id: number; name: string }[];
+};
 
-const navItems = [
-  {
-    name: "Home",
-    link: "/",
-  },
+let navItems: TnavItems[] = [
+  { name: "Home", link: "/" },
   {
     name: "Products",
     link: "/products",
+    list: [],
   },
-  {
-    name: "Favorites",
-    link: "/favourites",
-  },
-  {
-    name: "Contact",
-    link: "/contact",
-  },
-  {
-    name: "Blog",
-    link: "/blogs",
-  },
-  {
-    name: "FAQ",
-    link: "/faq",
-  },
-  {
-    name: "Privacy",
-    link: "/privacy-policy",
-  },
-  {
-    name: "Terms",
-    link: "/terms-and-conditions",
-  },
+  { name: "Favorites", link: "/favourites" },
+  { name: "Contact", link: "/contact" },
+  { name: "Blog", link: "/blogs" },
+  { name: "FAQ", link: "/faq" },
+  { name: "Privacy", link: "/privacy-policy" },
+  { name: "Terms", link: "/terms-and-conditions" },
 ];
 
 export default function NavMenu({
@@ -42,24 +31,53 @@ export default function NavMenu({
 }: {
   handleNavMenu: () => void;
 }) {
-  const navigation = useNavigate();
-  // State to track the opened list item
-  // const [openItem, setOpenItem] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const [openItem, setOpenItem] = useState<string | null>(null);
 
-  // Toggle function to handle open/close of the list
-  // const handleToggle = (itemName: string) => {
-  //   setOpenItem(openItem === itemName ? null : itemName);
-  // };
+  const handleToggle = (itemName: string) => {
+    setOpenItem(openItem === itemName ? null : itemName);
+  };
+
+  const {
+    data: allCategories,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useQuery({
+    queryKey: ["allCategories"],
+    queryFn: async () => getAllCategories(),
+  });
+
+  if (categoriesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (categoriesError) {
+    return <div>Error: {categoriesError.message}</div>;
+  }
+
+  console.log(allCategories);
+
+  // Update navItems with dynamic categories
+  const updatedNavItems = navItems.map((item) => {
+    if (item.name === "Products") {
+      return {
+        ...item,
+        list: allCategories?.data?.map(
+          (category: { id: number; name: string }) => ({
+            id: category.id,
+            name: category.name,
+          })
+        ),
+      };
+    }
+    return item;
+  });
 
   return (
-    <div className="absolute top-0 left-0 overflow-auto w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white">
-      {/* Main Menu Container */}
-      <div className="w-full text-2xl lg:text-2xl font-bold bg-white text-black dark:bg-[#3d3c3c] dark:text-white">
-        {/* Header */}
-        <div
-          style={{ borderBottom: ".1px solid gray" }}
-          className="flex justify-between items-center px-8 py-7"
-        >
+    <div className="absolute top-0 left-0 w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white overflow-auto">
+      {/* Header */}
+      <div className="w-full text-2xl font-bold bg-white dark:bg-[#3d3c3c] dark:text-white">
+        <div className="flex justify-between items-center px-8 py-7 border-b border-gray-300">
           <div>MENU</div>
           <div onClick={handleNavMenu} className="cursor-pointer">
             <IoMdClose />
@@ -67,22 +85,26 @@ export default function NavMenu({
         </div>
 
         {/* Menu List */}
-        <div className="text-xl lg:text-xl font-semibold px-8">
-          {navItems.map((item) => (
+        <div className="text-xl font-semibold px-8">
+          {updatedNavItems.map((item) => (
             <div
               key={item.name}
-              className="border-b py-6 uppercase"
-              style={{ borderBottom: ".1px solid gray" }}
+              className="border-b py-6 uppercase border-gray-300"
             >
+              {/* Main Menu Item */}
               <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={() => {
-                  handleNavMenu();
-                  navigation(item.link);
+                  if (item.list && item.list.length > 0) {
+                    handleToggle(item.name);
+                  } else {
+                    navigate(item.link);
+                    handleNavMenu(); // Close menu on selection
+                  }
                 }}
               >
                 <div>{item.name}</div>
-                {/* {item.list.length > 0 && (
+                {item.list && item.list.length > 0 && (
                   <div className="cursor-pointer">
                     {openItem === item.name ? (
                       <FaChevronUp />
@@ -90,30 +112,28 @@ export default function NavMenu({
                       <FaChevronDown />
                     )}
                   </div>
-                )} */}
+                )}
               </div>
 
-              {/* Conditional rendering of the sublist */}
-              {/* {openItem === item.name && item.list.length > 0 && (
-                <div>
-                  {item.list.map((list, index) => (
-                    <Link
-                      to={list.link} // Use React Router DOM's Link for navigation
-                      key={index}
-                      style={{
-                        borderBottom:
-                          index === item.list.length - 1
-                            ? "none"
-                            : ".1px solid gray",
+              {/* Submenu (Opens when clicked) */}
+              {openItem === item.name && item.list && (
+                <div className="pl-6 mt-2">
+                  {item.list.map((subItem: { id: number; name: string }) => (
+                    <div
+                      key={subItem.id}
+                      onClick={() => {
+                        navigate(`/products`, {
+                          state: { category_id: subItem.id },
+                        });
+                        handleNavMenu();
                       }}
-                      className="py-5 text-xs lg:text-base px-10 cursor-pointer block"
-                      onClick={handleNavMenu} // Close menu on click
+                      className="py-3 text-sm cursor-pointer hover:text-black/50 border-b border-gray-300 last:border-b-0"
                     >
-                      {list.name}
-                    </Link>
+                      {subItem.name}
+                    </div>
                   ))}
                 </div>
-              )} */}
+              )}
             </div>
           ))}
         </div>
