@@ -38,24 +38,10 @@ export default function NavMenu({
     setOpenItem(openItem === itemName ? null : itemName);
   };
 
-  const {
-    data: allCategories,
-    isLoading: categoriesLoading,
-    error: categoriesError,
-  } = useQuery({
+  const { data: allCategories, isLoading: categoriesLoading } = useQuery({
     queryKey: ["allCategories"],
     queryFn: async () => getAllCategories(),
   });
-
-  if (categoriesLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (categoriesError) {
-    return <div>Error: {categoriesError.message}</div>;
-  }
-
-  console.log(allCategories);
 
   // Update navItems with dynamic categories
   const updatedNavItems = navItems.map((item) => {
@@ -116,23 +102,35 @@ export default function NavMenu({
               </div>
 
               {/* Submenu (Opens when clicked) */}
-              {openItem === item.name && item.list && (
+              {categoriesLoading ? (
                 <div className="pl-6 mt-2">
-                  {item.list.map((subItem: { id: number; name: string }) => (
+                  {Array.from({ length: 5 }).map((_, index) => (
                     <div
-                      key={subItem.id}
-                      onClick={() => {
-                        navigate(`/products`, {
-                          state: { category_id: subItem.id },
-                        });
-                        handleNavMenu();
-                      }}
-                      className="py-3 text-sm cursor-pointer hover:text-black/50 border-b border-gray-300 last:border-b-0"
-                    >
-                      {subItem.name}
-                    </div>
+                      key={index}
+                      className="py-3 w-32 h-4 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md my-2"
+                    ></div>
                   ))}
                 </div>
+              ) : (
+                openItem === item.name &&
+                item.list && (
+                  <div className="pl-6 mt-2">
+                    {item.list.map((subItem: { id: number; name: string }) => (
+                      <div
+                        key={subItem.id}
+                        onClick={() => {
+                          navigate(`/products`, {
+                            state: { category_id: subItem.id },
+                          });
+                          handleNavMenu();
+                        }}
+                        className="py-3 text-sm cursor-pointer hover:text-black/50 border-b border-gray-300 last:border-b-0"
+                      >
+                        {subItem.name}
+                      </div>
+                    ))}
+                  </div>
+                )
               )}
             </div>
           ))}
