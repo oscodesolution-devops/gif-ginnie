@@ -5,8 +5,7 @@ export default function MainVideo() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-      });
+      videoRef.current.play().catch(() => {});
     }
   }, []);
 
@@ -14,7 +13,7 @@ export default function MainVideo() {
     <div className="video-section w-screen h-screen">
       <video
         ref={videoRef}
-        src="https://framerusercontent.com/assets/5xFVd6oskM9qwT0cSWrJIT0oUY.mp4"
+        src="./main-video.mp4"
         className="w-full h-full object-cover"
         autoPlay
         muted
