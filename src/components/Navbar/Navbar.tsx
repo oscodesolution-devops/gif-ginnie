@@ -10,7 +10,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { useAuth } from "../../context/Auth";
 
-
 export default function Navbar() {
   const navigate = useNavigate();
   const { cartItemsCount, cartLoading, initialCartCount } = useCart();
@@ -28,7 +27,10 @@ export default function Navbar() {
   useEffect(() => {
     function handleClickOutside(event: React.MouseEvent) {
       // @ts-ignore
-      if (userMenuRef.current && !userMenuRef?.current?.contains(event.target)) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef?.current?.contains(event.target)
+      ) {
         setIsUserIconOpen(false);
       }
     }
@@ -61,29 +63,30 @@ export default function Navbar() {
           }`}
         >
           <div className="flex items-center gap-4">
-          <img className="w-20 h-10" src="/favicon.jpg"></img>{name}
+            <img className="w-20 h-10" src="/favicon.jpg"></img>
+            {name}
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
-          <div className="relative cursor-pointer">
-            <Link to="/cart">
+          <Link to="/cart">
+            <div className="relative cursor-pointer">
               <FaShoppingCart className="text-xl" />
-            </Link>
-            {cartLoading ? (
-              <div className="text-xs absolute -top-2 -right-2 bg-gray-400 text-white rounded-full w-4 h-4 flex justify-center items-center animate-pulse">
-                ...
-              </div>
-            ) : cartItemsCount > 0 ? (
-              <div
-                className={`text-xs absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-4 h-4 flex justify-center items-center
+              {cartLoading ? (
+                <div className="text-xs absolute -top-2 -right-2 bg-gray-400 text-white rounded-full w-4 h-4 flex justify-center items-center animate-pulse">
+                  ...
+                </div>
+              ) : cartItemsCount > 0 ? (
+                <div
+                  className={`text-xs absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-4 h-4 flex justify-center items-center
                   ${isCountAnimating ? "animate-bounce" : ""}
                   ${cartItemsCount > initialCartCount ? "scale-110" : ""}
                   transition-all duration-300`}
-              >
-                {cartItemsCount}
-              </div>
-            ) : null}
-          </div>
+                >
+                  {cartItemsCount}
+                </div>
+              ) : null}
+            </div>
+          </Link>
 
           <div className="text-2xl cursor-pointer">
             <ThemeToggle />
