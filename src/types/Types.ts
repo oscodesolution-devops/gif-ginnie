@@ -23,6 +23,11 @@ export type TPopularProductItem = {
   product: number;
 };
 
+export type TSlidingImage = {
+  navigationId: number;
+  images: TPopularProductItem[];
+};
+
 export type TProduct = {
   id: number;
   name: string;
