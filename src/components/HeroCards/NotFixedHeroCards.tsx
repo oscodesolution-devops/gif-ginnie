@@ -26,15 +26,15 @@ export default function NotFixedHeroCards({
               })
             }
             key={item.category_id}
-            className="flex flex-col cursor-pointer justify-between bg-white dark:bg-black rounded-lg border-2 p-6 w-72 h-96" // Fixed width and height
+            className="flex flex-col cursor-pointer justify-between bg-white dark:bg-black rounded-lg border-2 p-6 md:w-72 md:h-96 gap-6 md:gap-0" // Fixed width and height
           >
-            <h2 className="text-3xl font-bold text-center mb-4 dark:text-white/90">
+            <h2 className="text-3xl font-bold text-center flex items-center justify-center  dark:text-white/90">
               {item.category_name}
             </h2>
-            <p className="text-sm text-gray-600 text-center mb-6 dark:text-white/70">
-              {item.category_description}
+            <p className="text-sm text-gray-600 text-center flex items-center justify-center  dark:text-white/70">
+              {item.category_description.slice(0, 150)}...
             </p>
-            <div className="aspect-[16/9] overflow-hidden">
+            <div className="aspect-[16/9] overflow-hidden pb-3">
               <img
                 src={`${item.image}`}
                 alt={item.category_name}
