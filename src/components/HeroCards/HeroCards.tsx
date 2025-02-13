@@ -3,6 +3,7 @@ import { getPopularCategories } from "../../api/api";
 import FixedHeroCards from "./FixedHeroCards";
 
 import NotFixedHeroCards from "./NotFixedHeroCards";
+import { TPopularCategories } from "../../types/Types";
 
 export default function HeroCards() {
   const {
