@@ -39,7 +39,7 @@ export default function FixedHeroCards({
               {imagesData[0].category_name}
             </h2>
             <p className="text-sm text-gray-600 text-center mb-6 dark:text-white/70">
-              {imagesData[0].category_description}
+              {imagesData[0].category_description.slice(0, 100)}
             </p>
             <div className="aspect-[4/3] overflow-hidden">
               <img
@@ -95,7 +95,7 @@ export default function FixedHeroCards({
             {imagesData[2].category_name}
           </h2>
           <p className="text-sm text-gray-600 text-center mb-6 dark:text-white/70">
-            {imagesData[2].category_description}
+            {imagesData[2].category_description.slice(0, 100)}
           </p>
           <div className="aspect-[4/3] overflow-hidden">
             <img
@@ -144,7 +144,7 @@ export default function FixedHeroCards({
               {imagesData[4].category_name}
             </h2>
             <p className="text-sm text-gray-600 text-center mb-6 dark:text-white/70">
-              {imagesData[4].category_description}
+              {imagesData[4].category_description.slice(0, 100)}
             </p>
             <div className="aspect-[4/3] overflow-hidden">
               <img
