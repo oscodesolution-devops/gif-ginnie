@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen">
       
-      <MainVideo />
+      {/* <MainVideo /> */}
       <Hero />
       <HeroCards />
       <Trending />
