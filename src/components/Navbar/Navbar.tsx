@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { useAuth } from "../../context/Auth";
 
+
 export default function Navbar() {
   const navigate = useNavigate();
   const { cartItemsCount, cartLoading, initialCartCount } = useCart();
@@ -59,7 +60,9 @@ export default function Navbar() {
             isInVideoSection ? "hidden" : "sm:block"
           }`}
         >
-          {name}
+          <div className="flex items-center gap-4">
+          <img className="w-20 h-10" src="/favicon.jpg"></img>{name}
+          </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
           <div className="relative cursor-pointer">
