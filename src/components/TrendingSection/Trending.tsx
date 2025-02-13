@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPopularProducts } from "../../api/api";
 import HomeHeading from "../HomeHeading/HomeHeading";
-import { TPopularProductItem } from "../../types/Types";
+import { TPopularProductItem, TSlidingImage } from "../../types/Types";
 import SlidingCards2 from "../SlidingCards/SlidingCards2";
+import SlidingCards2Skeleton from "./LoadingSleleton";
 
 type TPopularProductCategory = {
   id: number;
@@ -24,36 +25,27 @@ export default function Trending() {
     // enabled: !!token,
   });
 
-
-
   if (isLoading) {
-    return <div>loading</div>;
+    return <SlidingCards2Skeleton />;
   }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
+  const modifiedPopularProducts: TSlidingImage[] =
+    popularProducts?.data.flatMap((product: TPopularProductCategory) => ({
+      navigationId: product.id,
+      images: product.images,
+    }));
+  console.log(modifiedPopularProducts);
+
   return (
     <div className="w-full mt-20">
       <HomeHeading heading={"Trending Now"} />
-      {popularProducts && (
+      {modifiedPopularProducts && (
         <div>
-          {popularProducts?.data?.map((product: TPopularProductCategory) => (
-            <>
-              <div
-                className="font-bold pt-6 text-xl w-full flex justify-center"
-                key={product.id}
-              >
-                {product.name}
-              </div>
-              <SlidingCards2
-                card={product.images}
-                key={product.id}
-                navigationId={product.id}
-              />
-            </>
-          ))}
+          <SlidingCards2 card={modifiedPopularProducts} />
         </div>
       )}
     </div>
