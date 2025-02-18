@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Subscribe() {
   return (
-    <div className="relative w-full h-[90vh] mt-20 overflow-hidden">
+    <div className="relative w-full  h-[50vh] md:h-[90vh] mt-20 overflow-hidden">
       {/* Scrolling Images Container */}
       <motion.div
         className="flex h-full"
