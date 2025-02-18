@@ -20,7 +20,6 @@ export default function Navbar() {
     () => localStorage.getItem("theme") || "light"
   );
 
-
   // State for user menu
   const [isUserIconOpen, setIsUserIconOpen] = useState(false);
   const userMenuRef = useRef(null);
@@ -93,14 +92,16 @@ export default function Navbar() {
             : "bg-primary dark:bg-primaryDark"
         } flex justify-between items-center px-6 md:px-7 py-6 md:py-6 border-b border-black/5 bg-primary dark:bg-primaryDark dark:text-white`}
       >
-        <div>
-          {" "}
-          {currTheme == "dark" ? (
-            <img className="w-18 h-14 bg-red-400 px-4" src="/logo2.png"></img>
-          ) : (
-            <img className="w-18 h-14 bg-red-400" src="/favicon.jpg"></img>
-          )}
-        </div>
+        <Link to="/">
+          <div className="cursor-pointer">
+            {" "}
+            {currTheme == "dark" ? (
+              <img className="w-18 h-14  px-4" src="/logo2.png"></img>
+            ) : (
+              <img className="w-18 h-14 " src="/favicon.jpg"></img>
+            )}
+          </div>
+        </Link>
         <div
           className={`text-xl md:text-2xl hidden font-bold ${
             isInVideoSection ? "hidden" : "sm:block"
