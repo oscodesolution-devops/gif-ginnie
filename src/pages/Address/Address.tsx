@@ -300,7 +300,6 @@ const Address = () => {
     enabled: !!accessToken,
   });
 
-  console.log(userData);
 
   if (isLoading) return;
   <div className="mb-10">

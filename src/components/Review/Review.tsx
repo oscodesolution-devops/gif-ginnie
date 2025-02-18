@@ -36,7 +36,6 @@ export default function ReviewComponent() {
     },
   });
 
-  console.log(rating);
 
   const handleSubmit = () => {
     if (rating === 0) {

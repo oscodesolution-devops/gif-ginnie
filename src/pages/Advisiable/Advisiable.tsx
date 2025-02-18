@@ -23,7 +23,6 @@ export default function Advisiable() {
 
   useEffect(() => {
     const { category_id } = location.state || {};
-    console.log(category_id);
     setSelectedCategory(category_id || -1);
   }, [location]);
 

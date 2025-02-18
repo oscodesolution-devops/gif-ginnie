@@ -38,7 +38,6 @@ export default function Trending() {
       navigationId: product.id,
       images: product.images,
     }));
-  console.log(modifiedPopularProducts);
 
   return (
     <div className="w-full mt-20">

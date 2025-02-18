@@ -233,7 +233,6 @@ export const addAddress = async (data: AddressForm, token: string) => {
 };
 
 export const updateProfile = async (data: ProfileForm, token: string) => {
-  console.log(data);
   const response = await axios.patch(
     `${BASE_URL}/api/v1/users/profile/update/`,
     data,
