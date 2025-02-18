@@ -8,15 +8,12 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
-  const { isInVideoSection } = useVideoContext();
 
   return (
     <div className="w-full h-screen">
       <Navbar />
       <div
-        className={`w-full bg-primary dark:bg-primaryDark ${
-          isInVideoSection ? "" : "mt-10"
-        }`}
+        className={`w-full bg-primary dark:bg-primaryDark mt-12`}
       >
         {children}
       </div>
