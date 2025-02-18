@@ -46,11 +46,11 @@ export default function ImageGallery() {
   return (
     <div
       id="default-carousel"
-      className="relative w-full px-4 sm:px-16 md:px-24 mb-28"
+      className="relative w-full h-[35vh] sm:h-[60vh] md:h-[90vh]  mb-28"
       data-carousel="slide"
     >
       {/* Carousel Wrapper */}
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div className="relative h-full overflow-hidden w-full ">
         {carouselItems?.data?.map((item: TCarouselItem, index: number) => (
           <motion.div
             key={item.id}
@@ -64,7 +64,7 @@ export default function ImageGallery() {
           >
             <img
               src={item.image}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit  lg:min-h-[90vh] max-h-screen aspect-[2/1]"
               alt={item.title}
             />
           </motion.div>
@@ -90,7 +90,7 @@ export default function ImageGallery() {
       {/* Slider Controls */}
       <button
         type="button"
-        className="absolute top-1/2 left-0 z-30 flex items-center justify-center h-10 w-10 transform -translate-y-1/2 px-8 cursor-pointer group focus:outline-none  sm:px-20 md:px-28"
+        className="absolute top-1/2 left-0 z-30 flex items-center justify-center w-20 h-14 px-2 transform -translate-y-1/2  cursor-pointer group focus:outline-none "
         data-carousel-prev
         onClick={() =>
           setCurrentIndex(
@@ -100,9 +100,9 @@ export default function ImageGallery() {
           )
         }
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/40 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60  group-focus:outline-none">
           <svg
-            className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            className="w-4 h-4 text-black border-1 border-black dark:text-gray-800 rtl:rotate-180"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -121,7 +121,7 @@ export default function ImageGallery() {
       </button>
       <button
         type="button"
-        className="absolute top-1/2 right-0 z-30 flex items-center justify-center h-10 w-10 transform -translate-y-1/2 px-8 cursor-pointer group focus:outline-none sm:px-20 md:px-28"
+        className="absolute top-1/2 right-0 z-30 flex items-center justify-center w-20 h-14 px-2 transform -translate-y-1/2  cursor-pointer group focus:outline-none"
         data-carousel-next
         onClick={() =>
           setCurrentIndex(
@@ -129,9 +129,9 @@ export default function ImageGallery() {
           )
         }
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/40 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60  dark:group-focus:ring-gray-800/70 group-focus:outline-none">
           <svg
-            className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            className="w-4 h-4 text-black dark:text-gray-800 rtl:rotate-180"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
