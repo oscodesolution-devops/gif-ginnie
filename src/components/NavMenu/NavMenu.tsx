@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom"; // Import navigation hook
@@ -33,10 +33,25 @@ export default function NavMenu({
 }) {
   const navigate = useNavigate();
   const [openItem, setOpenItem] = useState<string | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = (itemName: string) => {
     setOpenItem(openItem === itemName ? null : itemName);
   };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        handleNavMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleNavMenu]);
 
   const { data: allCategories, isLoading: categoriesLoading } = useQuery({
     queryKey: ["allCategories"],
@@ -60,7 +75,10 @@ export default function NavMenu({
   });
 
   return (
-    <div className="absolute top-0 left-0 w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white overflow-auto shadow-md">
+    <div
+      ref={menuRef}
+      className="absolute top-0 right-0 w-full md:w-1/4 h-screen bg-white dark:bg-[#3d3c3c] dark:text-white overflow-auto shadow-md"
+    >
       {/* Header */}
       <div className="w-full text-2xl font-bold bg-white dark:bg-[#3d3c3c] dark:text-white">
         <div className="flex justify-between items-center px-8 py-7 border-b border-gray-300">

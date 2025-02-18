@@ -51,21 +51,16 @@ export default function Navbar() {
             : "bg-primary dark:bg-primaryDark"
         } flex justify-between items-center px-6 md:px-7 py-6 md:py-6 border-b border-black/5 bg-primary dark:bg-primaryDark dark:text-white`}
       >
-        <div
-          className="text-2xl cursor-pointer"
-          onClick={() => setIsMenuOpen(true)}
-        >
-          <RiMenu2Fill />
+        <div>
+          {" "}
+          <img className="w-20 h-10" src="/favicon.jpg"></img>
         </div>
         <div
           className={`text-xl md:text-2xl hidden font-bold ${
             isInVideoSection ? "hidden" : "sm:block"
           }`}
         >
-          <div className="flex items-center gap-4">
-            <img className="w-20 h-10" src="/favicon.jpg"></img>
-            {name}
-          </div>
+          <div className="flex items-center gap-4">{name}</div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
           <Link to="/cart">
@@ -147,6 +142,13 @@ export default function Navbar() {
                 )}
               </div>
             )}
+          </div>
+
+          <div
+            className="text-2xl cursor-pointer"
+            onClick={() => setIsMenuOpen(true)}
+          >
+            <RiMenu2Fill />
           </div>
         </div>
       </nav>
