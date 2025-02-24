@@ -24,6 +24,7 @@ let navItems: TnavItems[] = [
   { name: "FAQ", link: "/faq" },
   { name: "Privacy", link: "/privacy-policy" },
   { name: "Terms", link: "/terms-and-conditions" },
+  { name: "About us", link: "/about-us" },
 ];
 
 export default function NavMenu({
