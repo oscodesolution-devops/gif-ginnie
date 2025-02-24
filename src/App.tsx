@@ -26,6 +26,7 @@ import ProfileForm from "./pages/ProfileUpdate/ProfileUpdate";
 import OrderSummary from "./pages/Orders/Orders";
 import CouponPage from "./pages/Coupons/Coupons";
 import { Helmet } from "react-helmet-async";
+import AboutUs from "./pages/Aboutus/AboutUs";
 
 function App() {
   return (
@@ -227,6 +228,17 @@ function App() {
                         <title>Terms and Conditions</title>
                       </Helmet>
                       <TermsAndConditions />
+                    </>
+                  }
+                />
+                <Route
+                  path="/about-us"
+                  element={
+                    <>
+                      <Helmet>
+                        <title>About Us</title>
+                      </Helmet>
+                      <AboutUs />
                     </>
                   }
                 />

@@ -1,35 +1,50 @@
-import { FaXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
-import { FaPinterest, FaLinkedin, FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaYoutube, FaFacebook } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const footerSocialIcons = [
-  { icon: <FaXTwitter className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
-  { icon: <RiInstagramFill className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
-  { icon: <FaPinterest className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
-  { icon: <FaLinkedin className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
-  { icon: <FaTiktok className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
-  { icon: <FaYoutube className="w-6 h-6 text-gray-500 hover:text-gray-700" /> },
+  {
+    icon: <FaFacebook className="w-6 h-6 text-gray-500 hover:text-gray-700" />,
+    link: "https://www.facebook.com/profile.php?id=61566517247110",
+  },
+  {
+    icon: (
+      <RiInstagramFill className="w-6 h-6 text-gray-500 hover:text-gray-700" />
+    ),
+    link: "https://www.instagram.com/giftginnie1/profilecard/",
+  },
+
+  {
+    icon: <FaYoutube className="w-6 h-6 text-gray-500 hover:text-gray-700" />,
+    link: "https://youtube.com/@giftginnie?si=oloUJ-NgEC5ickPJ",
+  },
 ];
 
 const footerTabs = [
-  { title: "Product", tabs: [
+  {
+    title: "Product",
+    tabs: [
       { name: "Home", link: "/" },
       { name: "Products", link: "/products" },
       { name: "Favorites", link: "/favourites" },
-    ]
+    ],
   },
-  { title: "Company", tabs: [
+  {
+    title: "Company",
+    tabs: [
       { name: "Contact", link: "/contact" },
       { name: "Blog", link: "/blogs" },
       { name: "FAQ", link: "/faq" },
-    ]
+    ],
   },
-  { title: "Legal", tabs: [
+  {
+    title: "Legal",
+    tabs: [
       { name: "Privacy", link: "/privacy-policy" },
       { name: "Terms", link: "/terms-and-conditions" },
-    ]
-  }
+      { name: "About us", link: "/about-us" },
+    ],
+  },
 ];
 
 export default function Footer() {
@@ -41,19 +56,24 @@ export default function Footer() {
           <div className="text-2xl font-bold pb-5">GIFT GINNIE</div>
           <div className="flex gap-4 pb-6">
             {footerSocialIcons.map((item, index) => (
-              <div key={index} className="cursor-pointer">{item.icon}</div>
+              <a href={item.link} target="_blank" rel="noreferrer">
+                <div key={index} className="cursor-pointer">
+                  {item.icon}
+                </div>
+              </a>
             ))}
           </div>
           <p className="text-gray-500 font-bold pb-6 dark:text-white">
-            Welcome to your fashion destination. Discover the latest trends,
-            find perfect pieces for your wardrobe, and enjoy seamless online shopping.
+            Welcome to Gift Ginnie, your trusted partner in premium customized
+            corporate gifting, on-demand printing, and high-quality
+            Made-in-India products.
           </p>
-          <p className="text-gray-500 font-bold pb-6 dark:text-white">
+          {/* <p className="text-gray-500 font-bold pb-6 dark:text-white">
             Gift Ginne is a brand name registered with XYZ Pvt. Ltd
           </p>
           <p>Email Support: support@giftginnie.com</p>
           <p>For Sales Queries: bd@giftginnie.com</p>
-          <p>For Business Development: XYZ : 9999999999999</p>
+          <p>For Business Development: XYZ : 9999999999999</p> */}
         </div>
 
         {/* Right Section with Links */}
@@ -63,7 +83,11 @@ export default function Footer() {
               <div className="font-bold text-base pb-4">{item.title}</div>
               <div className="flex flex-col gap-3">
                 {item.tabs.map((tab, i) => (
-                  <Link key={i} to={tab.link} className="text-gray-500 font-medium hover:text-gray-700">
+                  <Link
+                    key={i}
+                    to={tab.link}
+                    className="text-gray-500 font-medium hover:text-gray-700"
+                  >
                     {tab.name}
                   </Link>
                 ))}

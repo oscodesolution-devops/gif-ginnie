@@ -96,9 +96,9 @@ export default function Navbar() {
           <div className="cursor-pointer">
             {" "}
             {currTheme == "dark" ? (
-              <img className="w-18 h-14  px-4" src="/logo2.png"></img>
+              <img className="w-18 h-12  px-4" src="/logo2.png"></img>
             ) : (
-              <img className="w-18 h-14 " src="/favicon.jpg"></img>
+              <img className="w-18 h-12 " src="/favicon.jpg"></img>
             )}
           </div>
         </Link>
