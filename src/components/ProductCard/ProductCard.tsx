@@ -68,6 +68,7 @@ export function LikeButton({
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["reviews"] });
+      queryClient.invalidateQueries({ queryKey: ["allProducts"] });
       toast.success(data.message);
     },
     onError: (error: Error) => {
