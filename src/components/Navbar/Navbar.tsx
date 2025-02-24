@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import  { useState, useEffect, useRef } from "react";
 import { RiMenu2Fill } from "react-icons/ri";
 import NavMenu from "../NavMenu/NavMenu";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";

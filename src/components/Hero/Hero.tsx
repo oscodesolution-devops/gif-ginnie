@@ -1,4 +1,3 @@
-import { name } from "../../constants";
 import ImageGallery from "../SlidingImages/SlidingImages";
 
 export default function Hero() {
