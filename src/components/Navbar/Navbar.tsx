@@ -22,28 +22,24 @@ export default function Navbar() {
 
   // State for user menu
   const [isUserIconOpen, setIsUserIconOpen] = useState(false);
-  const userMenuRef = useRef(null);
-
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
   const { checkAuth, logout } = useAuth();
 
   // Close menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: React.MouseEvent) {
-      // @ts-ignore
-      if (
-        userMenuRef.current &&
-        !userMenuRef?.current?.contains(event.target)
-      ) {
-        setIsUserIconOpen(false);
-      }
+  
+useEffect(() => {
+  function handleClickOutside(event: MouseEvent) { // React.MouseEvent hatao
+    if (
+      userMenuRef.current &&
+      !userMenuRef.current.contains(event.target as Node)
+    ) {
+      setIsUserIconOpen(false);
     }
-    // @ts-ignore
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      // @ts-ignore
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
 
   // Update theme when localStorage changes
   useEffect(() => {
