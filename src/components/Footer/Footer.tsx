@@ -71,13 +71,13 @@ export default function Footer() {
           <p className="text-gray-500 font-bold pb-6 dark:text-white">
             Gift Ginne is a brand name registered with XYZ Pvt. Ltd
           </p>
-          <p className="text-gray-500">
+          <p className="text-gray-500 font-semibold">
             ✉️ Email Support: support@giftginnie.com
           </p>
-          <p className="text-gray-500">
+          <p className="text-gray-500 font-semibold">
             📱For Sales Queries: bd@giftginnie.com
           </p>
-          <p className="text-gray-500">
+          <p className="text-gray-500 font-semibold">
             👨‍💼 For Business Development: XYZ : 9999999999999
           </p>
         </div>
