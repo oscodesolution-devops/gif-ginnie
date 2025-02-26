@@ -86,7 +86,7 @@ useEffect(() => {
           isInVideoSection
             ? "bg-transparent dark:bg-transparent"
             : "bg-primary dark:bg-primaryDark"
-        } flex justify-between items-center px-6 md:px-7 py-6 md:py-6 border-b border-black/5 bg-primary dark:bg-primaryDark dark:text-white`}
+        } flex justify-between items-center px-6 md:px-7 py-6 md:py-2 border-b border-black/5 bg-primary  dark:bg-primaryDark dark:text-white`}
       >
         <Link to="/">
           <div className="cursor-pointer">

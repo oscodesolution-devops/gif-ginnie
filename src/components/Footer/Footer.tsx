@@ -50,19 +50,9 @@ const footerTabs = [
 export default function Footer() {
   return (
     <footer className="bg-primary dark:bg-primaryDark dark:text-white py-10 px-5 md:px-7">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Section with Icons and Description */}
         <div>
-          <div className="text-2xl font-bold pb-5">GIFT GINNIE</div>
-          <div className="flex gap-4 pb-6">
-            {footerSocialIcons.map((item, index) => (
-              <a href={item.link} target="_blank" rel="noreferrer">
-                <div key={index} className="cursor-pointer">
-                  {item.icon}
-                </div>
-              </a>
-            ))}
-          </div>
           <p className="text-gray-500 font-bold pb-6 dark:text-white">
             Welcome to Gift Ginnie, your trusted partner in premium customized
             corporate gifting, on-demand printing, and high-quality
@@ -83,7 +73,7 @@ export default function Footer() {
         </div>
 
         {/* Right Section with Links */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 ">
           {footerTabs.map((item, index) => (
             <div key={index}>
               <div className="font-bold text-base pb-4">{item.title}</div>
@@ -101,6 +91,18 @@ export default function Footer() {
             </div>
           ))}
           
+        </div>
+        <div className="md:flex md:flex-col md:items-center">
+        <div className="text-2xl font-bold pb-5">GIFT GINNIE</div>
+          <div className="flex gap-4 pb-6">
+            {footerSocialIcons.map((item, index) => (
+              <a href={item.link} target="_blank" rel="noreferrer">
+                <div key={index} className="cursor-pointer">
+                  {item.icon}
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex justify-between items-center pt-4 sm:pt-0">

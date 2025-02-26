@@ -29,7 +29,7 @@ export default function ImageGallery() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % carouselItems?.data.length
+        (prevIndex) => (prevIndex + 1) % carouselItems?.data?.length
       );
     }, 5000); // Change every 5 seconds
     return () => clearInterval(interval);
@@ -46,11 +46,11 @@ export default function ImageGallery() {
   return (
     <div
       id="default-carousel"
-      className="relative w-full h-[35vh] sm:h-[60vh] md:h-[90vh]  mb-28"
+      className="relative w-full h-[35vh] sm:h-[60vh] md:h-[90vh] flex justify-center mb-28"
       data-carousel="slide"
     >
       {/* Carousel Wrapper */}
-      <div className="relative h-full overflow-hidden w-full ">
+      <div className="relative h-[90%] overflow-hidden w-[95%]  ">
         {carouselItems?.data?.map((item: TCarouselItem, index: number) => (
           <motion.div
             key={item.id}
@@ -64,7 +64,7 @@ export default function ImageGallery() {
           >
             <img
               src={item.image}
-              className="w-full h-full object-fit  lg:min-h-[90vh] max-h-screen aspect-[2/1]"
+              className="w-full h-full object-contain "
               alt={item.title}
             />
           </motion.div>
