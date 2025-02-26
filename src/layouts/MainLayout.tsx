@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import { useVideoContext } from "../context/MainVideo";
 
 interface MainLayoutProps {
   children: React.ReactNode;

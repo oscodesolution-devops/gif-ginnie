@@ -68,12 +68,18 @@ export default function Footer() {
             corporate gifting, on-demand printing, and high-quality
             Made-in-India products.
           </p>
-          {/* <p className="text-gray-500 font-bold pb-6 dark:text-white">
+          <p className="text-gray-500 font-bold pb-6 dark:text-white">
             Gift Ginne is a brand name registered with XYZ Pvt. Ltd
           </p>
-          <p>Email Support: support@giftginnie.com</p>
-          <p>For Sales Queries: bd@giftginnie.com</p>
-          <p>For Business Development: XYZ : 9999999999999</p> */}
+          <p className="text-gray-500">
+            ✉️ Email Support: support@giftginnie.com
+          </p>
+          <p className="text-gray-500">
+            📱For Sales Queries: bd@giftginnie.com
+          </p>
+          <p className="text-gray-500">
+            👨‍💼 For Business Development: XYZ : 9999999999999
+          </p>
         </div>
 
         {/* Right Section with Links */}
@@ -94,10 +100,20 @@ export default function Footer() {
               </div>
             </div>
           ))}
+          
         </div>
       </div>
-      <div className="text-gray-500 font-semibold text-center pt-10">
-        &copy; 2025. All rights reserved.
+      <div className="flex justify-between items-center pt-4 sm:pt-0">
+        <div className="text-gray-500 font-semibold flex items-center">
+          &copy; 2025. All rights reserved.
+        </div>
+        <div className="md:w-60 md:h-20 sm:w-40 sm:h-10 w-40 h-10 flex items-center justify-center bg-red-400">
+            <img
+              className="w-full h-full"
+              src="/razor_pay_shopify1.jpg"
+              alt=""
+            />
+          </div>
       </div>
     </footer>
   );
