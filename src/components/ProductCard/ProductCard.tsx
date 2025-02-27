@@ -12,7 +12,7 @@ export default function ProductCard({ card }: { card: TProduct }) {
       <div className="relative">
         <Link to={`/product/${card.id}`}>
           <img
-            src={card.images[0].image}
+            src={card.images[0]?.image}
             alt={card.name}
             className="w-full h-64 object-cover"
           />
