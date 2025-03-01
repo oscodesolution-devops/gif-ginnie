@@ -1,4 +1,4 @@
-import  { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RiMenu2Fill } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
 import NavMenu from "../NavMenu/NavMenu";
@@ -12,6 +12,20 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { useAuth } from "../../context/Auth";
 import { searchProduct } from "../../api/api";
 
+interface Product {
+  _id: number;
+  name: string;
+  description: string;
+  category: {
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+  };
+  images: string[];
+  selling_price: string;
+}
+
 export default function Navbar() {
   const navigate = useNavigate();
   const { cartItemsCount, cartLoading, initialCartCount } = useCart();
@@ -22,6 +36,28 @@ export default function Navbar() {
     () => localStorage.getItem("theme") || "light"
   );
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [noResults, setNoResults] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+        setSearchQuery("");  // Clear input field
+        setSearchResults([]); // Clear search results
+        setNoResults(false);  // Reset no results state
+        setHasSearched(false); // Reset search state
+      }
+    }
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  
+  
+
   // State for user menu
   const [isUserIconOpen, setIsUserIconOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement | null>(null);
@@ -29,24 +65,30 @@ export default function Navbar() {
 
   // Close menu when clicking outside
   const handleSearch = async (value: string) => {
-    console.log(value);
+    setHasSearched(true);
     const result = await searchProduct(value);
-    console.log("this is the result",result);
-  }
-  
-useEffect(() => {
-  function handleClickOutside(event: MouseEvent) { // React.MouseEvent hatao
-    if (
-      userMenuRef.current &&
-      !userMenuRef.current.contains(event.target as Node)
-    ) {
-      setIsUserIconOpen(false);
+    if (result.data.results.length > 0) {
+      setSearchResults(result.data.results);
+      setNoResults(false);
+    } else {
+      setSearchResults([]);
+      setNoResults(true);
     }
-  }
+  };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, []);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) { // React.MouseEvent hatao
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsUserIconOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Update theme when localStorage changes
   useEffect(() => {
@@ -89,11 +131,10 @@ useEffect(() => {
   return (
     <div className="fixed w-full top-0 z-50 transition-transform duration-300">
       <nav
-        className={`${
-          isInVideoSection
-            ? "bg-transparent dark:bg-transparent"
-            : "bg-primary dark:bg-primaryDark"
-        } flex justify-between items-center px-6 md:px-7 py-6 md:py-2 border-b border-black/5 bg-primary  dark:bg-primaryDark dark:text-white`}
+        className={`${isInVideoSection
+          ? "bg-transparent dark:bg-transparent"
+          : "bg-primary dark:bg-primaryDark"
+          } flex justify-between items-center px-6 md:px-7 py-6 md:py-2 border-b border-black/5 bg-primary  dark:bg-primaryDark dark:text-white`}
       >
         <Link to="/">
           <div className="cursor-pointer">
@@ -106,22 +147,48 @@ useEffect(() => {
           </div>
         </Link>
         <div
-          className={`text-xl md:text-2xl hidden font-bold ${
-            isInVideoSection ? "hidden" : "sm:block"
-          }`}
+          className={`text-xl md:text-2xl hidden font-bold ${isInVideoSection ? "hidden" : "sm:block"
+            }`}
         >
           <div className="flex items-center gap-4">{name}</div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
-          <div className="relative">
+          <div className="relative" ref={searchRef}>
             <FaSearch className="text-xl cursor-pointer" onClick={() => setIsSearchOpen(!isSearchOpen)} />
             {isSearchOpen && (
+              <div className="absolute top-[-0.5vw] right-10 bg-primary dark:border-2 dark:border-white dark:bg-primaryDark text-primaryBlack dark:text-primary shadow-lg text-sm px-4 py-1 rounded flex  gap-1 w-60">
               <input
                 type="text"
-                className="absolute md:top-[-5px] top-[6vw] md:right-8 px-2 py-1 border rounded-md shadow-md outline-none text-black"
-                placeholder="Search..."
-                onChange={(e) => handleSearch(e.target.value)}
+                className="w-full top-10 bg-transparent outline-none"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
+              <button 
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                onClick={() => handleSearch(searchQuery)}
+              >
+                Search
+              </button>
+            </div>            
+            )}
+            {isSearchOpen && hasSearched && (
+              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64">
+                {searchResults.length > 0 ? (
+                  searchResults.map((product) => (
+                    <div key={product._id} className="border-b p-2">
+                      <h3 className="font-bold">{product.name}</h3>
+                      <p>{product.description}</p>
+                      <p>Price: ₹{product.selling_price}</p>
+                      {product.category?.image && (
+                        <img src={product.category.image} alt={product.name} className="w-full h-20 object-cover mt-2" />
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-500 dark:text-gray-300">No results found</div>
+                )}
+              </div>
             )}
           </div>
 
