@@ -177,7 +177,7 @@ function ProductInfo({ product }: { product: TProduct }) {
                 <span className="font-bold">description</span>
               </div>
 
-              <p className="py-5 text-sm">{product.brand}</p>
+              <p className="py-5 text-sm">{product.description}</p>
             </div>
           </div>
 

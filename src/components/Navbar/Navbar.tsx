@@ -1,5 +1,6 @@
 import  { useState, useEffect, useRef } from "react";
 import { RiMenu2Fill } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 import NavMenu from "../NavMenu/NavMenu";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import { useVideoContext } from "../../context/MainVideo";
@@ -9,6 +10,7 @@ import { useCart } from "../../context/AddToCart";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { useAuth } from "../../context/Auth";
+import { searchProduct } from "../../api/api";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -19,13 +21,18 @@ export default function Navbar() {
   const [currTheme, setCurrTheme] = useState(
     () => localStorage.getItem("theme") || "light"
   );
-
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   // State for user menu
   const [isUserIconOpen, setIsUserIconOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement | null>(null);
   const { checkAuth, logout } = useAuth();
 
   // Close menu when clicking outside
+  const handleSearch = async (value: string) => {
+    console.log(value);
+    const result = await searchProduct(value);
+    console.log("this is the result",result);
+  }
   
 useEffect(() => {
   function handleClickOutside(event: MouseEvent) { // React.MouseEvent hatao
@@ -106,6 +113,18 @@ useEffect(() => {
           <div className="flex items-center gap-4">{name}</div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
+          <div className="relative">
+            <FaSearch className="text-xl cursor-pointer" onClick={() => setIsSearchOpen(!isSearchOpen)} />
+            {isSearchOpen && (
+              <input
+                type="text"
+                className="absolute md:top-[-5px] top-[6vw] md:right-8 px-2 py-1 border rounded-md shadow-md outline-none text-black"
+                placeholder="Search..."
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+            )}
+          </div>
+
           <Link to="/cart">
             <div className="relative cursor-pointer">
               <FaShoppingCart className="text-xl" />

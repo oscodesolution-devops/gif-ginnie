@@ -327,3 +327,8 @@ export const postRating = async (
   );
   return response.data;
 };
+
+export const searchProduct = async ( query:string) => {
+  const response = await axios.get(`${BASE_URL}/api/v1/products/searchProducts?query=${query}`);
+  return response;
+};
