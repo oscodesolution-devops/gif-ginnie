@@ -128,7 +128,7 @@ function ProductInfo({ product }: { product: TProduct }) {
 
           <div className="flex justify-between items-center py-6 border-b dark:border-white/30">
             <div className="text-lg md:text-xl font-thin">
-            ₹{product.selling_price}
+              ₹{product.selling_price}
             </div>
             <div className="flex gap-4 text-sm">
               <div className="line-through">₹{product.original_price}</div>
@@ -136,8 +136,8 @@ function ProductInfo({ product }: { product: TProduct }) {
                 {Math.round(
                   (1 -
                     parseInt(product.selling_price) /
-                      parseInt(product.original_price)) *
-                    100
+                    parseInt(product.original_price)) *
+                  100
                 )}
                 %
               </div>
@@ -176,8 +176,13 @@ function ProductInfo({ product }: { product: TProduct }) {
               <div className="flex justify-between items-center cursor-pointer w-full">
                 <span className="font-bold">description</span>
               </div>
-
-              <p className="py-5 text-sm">{product.description}</p>
+              <p className="py-5 text-sm">
+                {product.description.split('.').map((sentence, index) => (
+                  <span key={index}>
+                    {sentence.trim()}{index !== product.description.split('.').length - 1 && '.'}<br />
+                  </span>
+                ))}
+              </p>
             </div>
           </div>
 
@@ -212,7 +217,7 @@ function ProductInfo({ product }: { product: TProduct }) {
         </div>
       </div>
       <ReviewComponent />
-      <Reviews productId={product.id}/>
+      <Reviews productId={product.id} />
       <Subscribe />
     </div>
   );
