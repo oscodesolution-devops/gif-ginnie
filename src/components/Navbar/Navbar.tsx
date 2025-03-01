@@ -37,7 +37,7 @@ export default function Navbar() {
   );
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const [noResults, setNoResults] = useState(false);
+  const [_noResults, setNoResults] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLDivElement | null>(null);
