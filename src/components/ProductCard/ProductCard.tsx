@@ -11,11 +11,17 @@ export default function ProductCard({ card }: { card: TProduct }) {
     <div className="flex flex-col gap-2 cursor-pointer" key={card.id}>
       <div className="relative">
         <Link to={`/product/${card.id}`}>
-          <img
-            src={card.category?.image}
-            alt={card.name}
-            className="w-full h-64 object-cover"
-          />
+          {card.images.length > 0 ? (
+            <img
+              src={card.images[0].image}
+              alt={card.name}
+              className="w-full h-64 object-cover"
+            />
+          ) : (
+            <div className="w-full h-64 flex items-center justify-center bg-gray-200 text-gray-500">
+              No images available
+            </div>
+          )}
           <div className="uppercase bg-[#E4E3E0] dark:bg-black/70 dark:text-white/70 rounded-sm text-sm absolute top-5 right-4 px-2 py-1">
             {card.in_stock ? "In Stock" : "Out of Stock"}
           </div>
@@ -30,7 +36,7 @@ export default function ProductCard({ card }: { card: TProduct }) {
             {Math.round(
               (1 -
                 parseInt(card.selling_price) / parseInt(card.original_price)) *
-                100
+              100
             )}
             %
           </div>
@@ -88,9 +94,8 @@ export function LikeButton({
   return (
     <div
       onClick={handleLikeClick}
-      className={`absolute top-5 left-2 text-xl bg-[#E4E3E0] dark:bg-black/70 rounded-md px-2 py-2 hover:bg-[#E4E3E0]/70 cursor-pointer ${
-        isLiked ? "text-red-500" : "dark:text-white/70"
-      }`}
+      className={`absolute top-5 left-2 text-xl bg-[#E4E3E0] dark:bg-black/70 rounded-md px-2 py-2 hover:bg-[#E4E3E0]/70 cursor-pointer ${isLiked ? "text-red-500" : "dark:text-white/70"
+        }`}
     >
       {mutation.isPending ? (
         <div className="flex items-center justify-center ">
