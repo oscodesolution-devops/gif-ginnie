@@ -173,7 +173,7 @@ export default function Navbar() {
             </div>            
             )}
             {isSearchOpen && hasSearched && (
-              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64 h-screen overflow-scroll">
+              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64 h-[70vh] overflow-scroll">
                 {searchResults.length > 0 ? (
                   searchResults.map((product) => (
                     <div key={product._id} className="border-b p-2">
