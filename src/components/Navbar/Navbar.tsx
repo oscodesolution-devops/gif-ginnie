@@ -173,12 +173,11 @@ export default function Navbar() {
             </div>            
             )}
             {isSearchOpen && hasSearched && (
-              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64">
+              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64 h-screen overflow-scroll">
                 {searchResults.length > 0 ? (
                   searchResults.map((product) => (
                     <div key={product._id} className="border-b p-2">
                       <h3 className="font-bold">{product.name}</h3>
-                      <p>{product.description}</p>
                       <p>Price: ₹{product.selling_price}</p>
                       {product.category?.image && (
                         <img src={product.category.image} alt={product.name} className="w-full h-20 object-cover mt-2" />
