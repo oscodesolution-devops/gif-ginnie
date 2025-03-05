@@ -165,7 +165,7 @@ export default function Navbar() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button 
-                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                className="dark:bg-white dark:text-black bg-black text-white px-3 py-1 rounded transition"
                 onClick={() => handleSearch(searchQuery)}
               >
                 Search
@@ -173,15 +173,16 @@ export default function Navbar() {
             </div>            
             )}
             {isSearchOpen && hasSearched && (
-              <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 shadow-lg rounded p-4 w-64 h-[70vh] overflow-scroll">
+              <div className="absolute top-10 lg:right-0 right-[-10.25rem] bg-white dark:bg-gray-800 shadow-lg rounded p-4 lg:w-[25rem] h-[70vh] overflow-scroll">
                 {searchResults.length > 0 ? (
                   searchResults.map((product) => (
-                    <div key={product._id} className="border-b p-2">
-                      <h3 className="font-bold">{product.name}</h3>
-                      <p>Price: ₹{product.selling_price}</p>
+                    
+                    <div key={product._id} className="border-b p-2 flex gap-5">
                       {product.category?.image && (
-                        <img src={product.category.image} alt={product.name} className="w-full h-20 object-cover mt-2" />
+                        <img src={product.category.image} alt={product.name} className="h-16 w-16 rounded-full object-cover mt-2" />
                       )}
+                      <h3 className="font-bold lg:text-[1vw]">{product.name}</h3>
+                      <p>Price: ₹{product.selling_price}</p>             
                     </div>
                   ))
                 ) : (
