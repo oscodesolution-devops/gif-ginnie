@@ -17,7 +17,7 @@ export default function NotFixedHeroCards({
           Collection. Explore Deals on Jeans, Sneakers, and More!
         </div>
       </div>
-      <div className="mx-auto px-4 lg:px-20 py-12 flex justify-center flex-wrap gap-6 items-stretch">
+      <div className="mx-auto px-4  py-12 flex justify-center flex-wrap gap-6 items-stretch">
         {popularcatogories?.data?.map((item: TPopularCategories) => (
           <div
             onClick={() =>
@@ -38,7 +38,7 @@ export default function NotFixedHeroCards({
               <img
                 src={`${item.image}`}
                 alt={item.category_name}
-                className="w-full h-full object-cover" // Ensures the image covers the card space
+                className="w-full h-full object-contain" // Ensures the image covers the card space
               />
             </div>
           </div>

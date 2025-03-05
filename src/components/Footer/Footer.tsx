@@ -117,6 +117,9 @@ export default function Footer() {
             />
           </div>
       </div>
+      <div className="w-full h-32 lg:flex items-center justify-center hidden overflow-hidden">
+            <h1 className="text-[10vw] translate-y-5 gift">GiftGinnie</h1>
+      </div>
     </footer>
   );
 }

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,4 +22,7 @@ body {
   width: 40%;
   height: 100%;
   object-fit: fill;
+}
+.gift{
+  font-family: Monoton;
 }

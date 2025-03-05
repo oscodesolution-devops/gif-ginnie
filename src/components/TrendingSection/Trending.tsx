@@ -52,7 +52,7 @@ export default function Trending() {
                 className="w-full h-48 object-contain "
               />
               <h3 className="font-bold text-lg mt-2 dark:text-white">{product.name}</h3>
-              <p className="text-gray-500 dark:text-white">{product.description}</p>
+              {/* <p className="text-gray-500 dark:text-white">{product.description}</p> */}
             </div>
           ))
         )}
