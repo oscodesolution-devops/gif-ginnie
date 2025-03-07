@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import { useNavigate } from "react-router-dom";
+import { getBlogPosts } from '../../api/api';
+import { useAuth } from "../../context/Auth";
 
 interface CardProps {
   image: string;
@@ -60,8 +62,24 @@ const cardsList: CardProps[] = [
 ];
 
 export default function Blogs() {
+  // const [cards, setCards] = useState<CardProps[]>([]);
+  const [cards, _setCards] = useState<CardProps[]>(cardsList);
+  const { accessToken } = useAuth();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getBlogPosts(accessToken as string);
+        console.log(data?.data?.results);
+        // setCards(data?.data?.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
-  const [cards] = useState<CardProps[]>(cardsList);
   return (
     <div className="w-full min-h-screen flex justify-center items-center flex-col">
       

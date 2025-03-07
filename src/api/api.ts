@@ -332,3 +332,14 @@ export const searchProduct = async ( search:string) => {
   const response = await axios.get(`${BASE_URL}/api/v1/products/searchProducts?search=${search}`);
   return response;
 };
+
+export const getBlogPosts = async (token: string) => {
+  const response = await axios.get(`${BASE_URL}/api/v1/blog-posts/`, {
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
