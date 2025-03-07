@@ -22,7 +22,10 @@ interface Product {
     description: string;
     image: string;
   };
-  images: string[];
+  images: {
+    id: number;
+    image: string;
+  }[];
   selling_price: string;
 }
 
@@ -51,12 +54,12 @@ export default function Navbar() {
         setHasSearched(false); // Reset search state
       }
     }
-  
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
-  
+
+
 
   // State for user menu
   const [isUserIconOpen, setIsUserIconOpen] = useState(false);
@@ -67,6 +70,7 @@ export default function Navbar() {
   const handleSearch = async (value: string) => {
     setHasSearched(true);
     const result = await searchProduct(value);
+    console.log("data", result.data.results);
     if (result.data.results.length > 0) {
       setSearchResults(result.data.results);
       setNoResults(false);
@@ -157,32 +161,40 @@ export default function Navbar() {
             <FaSearch className="text-xl cursor-pointer" onClick={() => setIsSearchOpen(!isSearchOpen)} />
             {isSearchOpen && (
               <div className="absolute top-[-0.5vw] right-10 bg-primary dark:border-2 dark:border-white dark:bg-primaryDark text-primaryBlack dark:text-primary shadow-lg text-sm px-4 py-1 rounded flex  gap-1 w-60">
-              <input
-                type="text"
-                className="w-full top-10 bg-transparent outline-none"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button 
-                className="dark:bg-white dark:text-black bg-black text-white px-3 py-1 rounded transition"
-                onClick={() => handleSearch(searchQuery)}
-              >
-                Search
-              </button>
-            </div>            
+                <input
+                  type="text"
+                  className="w-full top-10 bg-transparent outline-none"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button
+                  className="dark:bg-white dark:text-black bg-black text-white px-3 py-1 rounded transition"
+                  onClick={() => handleSearch(searchQuery)}
+                >
+                  Search
+                </button>
+              </div>
             )}
             {isSearchOpen && hasSearched && (
               <div className="absolute top-10 lg:right-0 right-[-10.25rem] bg-white dark:bg-gray-800 shadow-lg rounded p-4 lg:w-[25rem] h-[70vh] overflow-scroll">
                 {searchResults.length > 0 ? (
                   searchResults.map((product) => (
-                    
+
                     <div key={product._id} className="border-b p-2 flex gap-5">
-                      {product.category?.image && (
-                        <img src={product.category.image} alt={product.name} className="h-16 w-16 rounded-full object-cover mt-2" />
+                      {product.images?.length > 0 ? (
+                        <img
+                          src={product.images[0].image}
+                          alt={product.name}
+                          className="h-16 w-16 rounded-full object-cover mt-2"
+                        />
+                      ) : (
+                        <div className="h-16 w-16 rounded-full bg-gray-300 flex items-center text-[0.8vw] justify-center text-gray-600">
+                          No Image
+                        </div>
                       )}
                       <h3 className="font-bold lg:text-[1vw]">{product.name}</h3>
-                      <p>Price: ₹{product.selling_price}</p>             
+                      <p>Price: ₹{product.selling_price}</p>
                     </div>
                   ))
                 ) : (
