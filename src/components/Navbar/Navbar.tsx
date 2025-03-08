@@ -70,7 +70,6 @@ export default function Navbar() {
   const handleSearch = async (value: string) => {
     setHasSearched(true);
     const result = await searchProduct(value);
-    console.log("data", result.data.results);
     if (result.data.results.length > 0) {
       setSearchResults(result.data.results);
       setNoResults(false);

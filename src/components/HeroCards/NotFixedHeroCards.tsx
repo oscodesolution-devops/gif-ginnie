@@ -26,7 +26,7 @@ export default function NotFixedHeroCards({
               })
             }
             key={item.category_id}
-            className="flex flex-col  cursor-pointer justify-between bg-white dark:bg-black rounded-lg border-2 p-4 md:w-72 md:h-96 gap-6 md:gap-0" // Fixed width and height
+            className="flex flex-col  cursor-pointer justify-between bg-white dark:bg-[#1c1c1c] rounded-lg border-2 p-4 md:w-72 md:h-96 gap-6 md:gap-0" // Fixed width and height
           >
             <h2 className="text-3xl font-bold text-center flex items-center justify-center  dark:text-white/90">
               {item.category_name}

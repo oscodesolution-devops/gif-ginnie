@@ -26,7 +26,6 @@ export default function Trending() {
     queryFn: async () => getPopularProducts(),
     // enabled: !!token,
   });
-  console.log(popularProducts);
   if (isLoading) {
     return <SlidingCards2Skeleton />;
   }

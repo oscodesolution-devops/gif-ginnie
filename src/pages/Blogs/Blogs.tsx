@@ -73,7 +73,7 @@ export default function Blogs() {
         console.log(data?.data?.results);
         // setCards(data?.data?.results);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();
