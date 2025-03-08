@@ -54,7 +54,7 @@ function ProductInfo({ product }: { product: TProduct }) {
   // state to keep track of quantity
   const [quantity, setQuantity] = useState(1);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [activeImage, setActiveImage] = useState(product.category.image);
+  const [activeImage, setActiveImage] = useState(product?.images[0]?.image);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
@@ -102,7 +102,7 @@ function ProductInfo({ product }: { product: TProduct }) {
   }, [addToCartState, resetAddToCartState]);
 
   return (
-    <div className="w-full min-h-screen sm:mt-20">
+    <div className="w-full min-h-screen lg:mt-16">
       <div className="w-full pt-5 md:grid md:grid-cols-2 gap-8 px-6 md:px-7">
         {/* Image container - Responsive adjustments */}
         <div className="w-full md:sticky md:top-20 h-auto md:h-[calc(100vh-2rem)] mb-6 md:mb-0">
@@ -147,10 +147,10 @@ function ProductInfo({ product }: { product: TProduct }) {
           <div className="py-6 border-b dark:border-white/30 flex flex-col gap-4">
             <div>Choose Other Versions</div>
             <div className="flex gap-2 flex-wrap">
-              <OtherVersionImages
+              {/* <OtherVersionImages
                 imageUrl={product.category.image}
                 setActiveImage={setActiveImage}
-              />
+              /> */}
               {product.images.map((image) => (
                 <OtherVersionImages
                   imageUrl={image.image}

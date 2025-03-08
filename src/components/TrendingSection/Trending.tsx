@@ -4,6 +4,7 @@ import HomeHeading from "../HomeHeading/HomeHeading";
 import { TPopularProductItem} from "../../types/Types";
 // import SlidingCards2 from "../SlidingCards/SlidingCards2";
 import SlidingCards2Skeleton from "./LoadingSleleton";
+import { useNavigate } from "react-router-dom";
 
 type TPopularProductCategory = {
   id: number;
@@ -15,6 +16,7 @@ type TPopularProductCategory = {
 };
 
 export default function Trending() {
+  const navigate = useNavigate();
   const {
     data: popularProducts,
     isLoading,
@@ -24,7 +26,7 @@ export default function Trending() {
     queryFn: async () => getPopularProducts(),
     // enabled: !!token,
   });
-
+  console.log(popularProducts);
   if (isLoading) {
     return <SlidingCards2Skeleton />;
   }
@@ -45,14 +47,13 @@ export default function Trending() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
         {popularProducts?.data?.map((product: TPopularProductCategory) =>
           product.images.map((image: TPopularProductItem) => (
-            <div key={image.id} className="p-4 border rounded-lg shadow-lg">
+            <div key={image.id} className="border-2 cursor-pointer p-4 h-[30vw] rounded-lg shadow-lg overflow-hidden" onClick={() => navigate(`/product/${product.id}/`)}>
               <img
                 src={image.image}
                 alt={product.name}
-                className="w-full h-48 object-contain "
+                className="w-full h-[70%] object-cover rounded-lg "
               />
-              <h3 className="font-bold text-lg mt-2 dark:text-white">{product.name}</h3>
-              {/* <p className="text-gray-500 dark:text-white">{product.description}</p> */}
+              <h3 className="text-[1.2vw] mt-2 dark:text-white">{product.name}</h3>
             </div>
           ))
         )}
