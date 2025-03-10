@@ -153,7 +153,7 @@ export default function Navbar() {
           className={`text-xl md:text-2xl hidden font-bold ${isInVideoSection ? "hidden" : "sm:block"
             }`}
         >
-          <div className="flex items-center gap-4">{name}</div>
+          <div className="flex items-center gap-4"><span>Welcome to </span>{name}</div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
           <div className="relative" ref={searchRef}>
