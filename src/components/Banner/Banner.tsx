@@ -2,7 +2,7 @@ import BannerImg from '../../assets/banner-gift-gnnie-website.jpg'
 
 
 export default function Banner() {
-    const phoneNumber = "8000932933";
+    const phoneNumber = "918000932933";
     const message = "Hello! I'm interested in your services.";
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
         message
